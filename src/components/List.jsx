@@ -6,7 +6,7 @@ function List({ coordinates, toggleStatus }) {
       <p className="station-status-msg">Stations Status:</p>
       <p id="list-item">
         {coordinates.map((coord) => (
-          <p key={coord.id}>
+          <p key={coord.id} >
             id: {coord.id} | status: {coord.status}
           </p>
         ))}

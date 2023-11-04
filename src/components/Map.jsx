@@ -10,12 +10,43 @@ const redMarkerIcon = {
 const greenMarkerIcon = {
   url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png", // URL for the green marker icon
 };
+const yellowMarkerIcon = {
+  url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png", // URL for the green marker icon
+};
+
+
+const getIcon = (status) => {
+  switch (status) {
+    case "free":
+      return greenMarkerIcon;
+    case "used":
+      return yellowMarkerIcon;
+    case "error":
+      return redMarkerIcon;
+    default:
+      return greenMarkerIcon;
+  }
+}
+
+const toggleIcon = (status) => {
+  switch (status) {
+    case "free":
+      return "used";
+    case "used":
+      return "error";
+    case "error":
+      return "free";
+    default:
+      return "free";
+  }
+}
 
 const MapComponent = (props) => {
   const mapStyles = {
     height: "95%",
     width: "80%",
     marginTop: "22px",
+    marginLeft: "200px",
   };
 
   const [coordinates, setCoordinates] = useState([]);
@@ -26,11 +57,10 @@ const MapComponent = (props) => {
 
   const toggleStatus = (index) => {
     const updatedCoordinates = [...coordinates];
-    updatedCoordinates[index].status =
-      coordinates[index].status === "on" ? "off" : "on";
+    updatedCoordinates[index].status = toggleIcon(coordinates[index].status);
     setCoordinates(updatedCoordinates);
     
-    // props.socket.emit("toggle", { id: coordinates[index].id, status: coordinates[index].status})
+    props.socket.emit("message", { id: coordinates[index].id, status: coordinates[index].status})
   };
 
   return (
@@ -49,7 +79,7 @@ const MapComponent = (props) => {
           <Marker
             key={index}
             position={coord}
-            icon={coord.status === "on" ? greenMarkerIcon : redMarkerIcon}
+            icon={getIcon(coord.status)}
             onClick={() => toggleStatus(index)}
           />
         ))}
@@ -58,6 +88,9 @@ const MapComponent = (props) => {
     </div>
   );
 };
+
+
+
 
 export default GoogleApiWrapper({
   apiKey: "", // Replace with your own Google Maps API key
