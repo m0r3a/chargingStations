@@ -70,7 +70,7 @@ const MapComponent = (props) => {
       <Map
         id="center"
         google={props.google}
-        zoom={14} // Set the initial zoom level to 13
+        zoom={13} // Set the initial zoom level to 13
         style={mapStyles}
         initialCenter={{
           lat: 47.053, // Oradea city latitude
