@@ -2,12 +2,14 @@
   padding: 0;
   margin: auto;
   box-sizing: border-box;
+  color: white;
 }
 html {
   font-family: "Montserrat", sans-serif;
 }
 body {
-  background: #eee;
+  background: linear-gradient(135deg, #1D976C, #93F9B9);
+  background-size: 400% 400%;
 }
 
 #center {
@@ -35,3 +37,19 @@ h1 {
 .list {
   padding: 16px 0 0 10px;
 }
+
+/* @-webkit-keyframes AnimationName {
+  0%{background-position:1% 0%}
+  50%{background-position:99% 100%}
+  100%{background-position:1% 0%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:1% 0%}
+  50%{background-position:99% 100%}
+  100%{background-position:1% 0%}
+}
+@keyframes AnimationName {
+  0%{background-position:1% 0%}
+  50%{background-position:99% 100%}
+  100%{background-position:1% 0%}
+} */
