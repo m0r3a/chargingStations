@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-import initialCoordinates from "./initialCoordinates";
-import List from "./List";
+import React, { useState, useEffect } from 'react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import initialCoordinates from './initialCoordinates';
+import List from './List';
 
 const redMarkerIcon = {
   url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png", // URL for the red marker icon
@@ -18,13 +18,19 @@ const MapComponent = (props) => {
     marginTop: "22px",
   };
 
-  const [coordinates, setCoordinates] = useState(initialCoordinates);
+  const [coordinates, setCoordinates] = useState([]);
+
+  useEffect(() => {
+    setCoordinates(props.data)
+  }, [props.data])
 
   const toggleStatus = (index) => {
     const updatedCoordinates = [...coordinates];
     updatedCoordinates[index].status =
       coordinates[index].status === "on" ? "off" : "on";
     setCoordinates(updatedCoordinates);
+    
+    // props.socket.emit("toggle", { id: coordinates[index].id, status: coordinates[index].status})
   };
 
   return (
