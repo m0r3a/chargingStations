@@ -21,7 +21,7 @@ function App(){
 
     return(
         <>
-        <h1>Charging station Oradea</h1>
+        <h1>Charging stations Oradea</h1>
         <MapComponent />
         </>
     )
