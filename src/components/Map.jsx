@@ -34,8 +34,8 @@ const MapComponent = (props) => {
         zoom={14} // Set the initial zoom level to 13
         style={mapStyles}
         initialCenter={{
-          lat: 47.0469, // Oradea city latitude
-          lng: 21.9183, // Oradea city longitude
+          lat: 47.0530, // Oradea city latitude
+          lng: 21.9282, // Oradea city longitude
         }}
       >
         {coordinates.map((coord, index) => (
