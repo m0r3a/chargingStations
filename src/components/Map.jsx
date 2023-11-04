@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import initialCoordinates from './initialCoordinates';
-import List from './List';
+import React, { useState, useEffect } from "react";
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import initialCoordinates from "./initialCoordinates";
+import List from "./List";
 
 const redMarkerIcon = {
   url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png", // URL for the red marker icon
@@ -14,7 +14,6 @@ const yellowMarkerIcon = {
   url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png", // URL for the green marker icon
 };
 
-
 const getIcon = (status) => {
   switch (status) {
     case "free":
@@ -26,7 +25,7 @@ const getIcon = (status) => {
     default:
       return greenMarkerIcon;
   }
-}
+};
 
 const toggleIcon = (status) => {
   switch (status) {
@@ -39,28 +38,31 @@ const toggleIcon = (status) => {
     default:
       return "free";
   }
-}
+};
 
 const MapComponent = (props) => {
   const mapStyles = {
     height: "95%",
     width: "80%",
     marginTop: "22px",
-    marginLeft: "200px",
+    marginLeft: "167px",
   };
 
   const [coordinates, setCoordinates] = useState([]);
 
   useEffect(() => {
-    setCoordinates(props.data)
-  }, [props.data])
+    setCoordinates(props.data);
+  }, [props.data]);
 
   const toggleStatus = (index) => {
     const updatedCoordinates = [...coordinates];
     updatedCoordinates[index].status = toggleIcon(coordinates[index].status);
     setCoordinates(updatedCoordinates);
-    
-    props.socket.emit("message", { id: coordinates[index].id, status: coordinates[index].status})
+
+    props.socket.emit("message", {
+      id: coordinates[index].id,
+      status: coordinates[index].status,
+    });
   };
 
   return (
@@ -88,9 +90,6 @@ const MapComponent = (props) => {
     </div>
   );
 };
-
-
-
 
 export default GoogleApiWrapper({
   apiKey: "", // Replace with your own Google Maps API key
